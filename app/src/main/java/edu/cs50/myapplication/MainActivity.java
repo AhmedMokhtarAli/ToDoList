@@ -12,21 +12,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
+
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.lang.invoke.ConstantCallSite;
-import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements Adapter.ItemClickListner{
     private static final String TAG =MainActivity.class.getSimpleName() ;
     RecyclerView recyclerView;
     Adapter adapter;
-    Date date;
     AppDataBase dataBase;
     private FloatingActionButton floatingActionButton;
 
@@ -53,7 +50,6 @@ public class MainActivity extends AppCompatActivity implements Adapter.ItemClick
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
 
-        extracted();
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -72,7 +68,8 @@ public class MainActivity extends AppCompatActivity implements Adapter.ItemClick
                 });
             }
         }).attachToRecyclerView(recyclerView);
-        }
+        extracted();
+    }
     private void extracted() {
         Log.d(TAG,"GEETING DATA FROM DATABASE");
         final LiveData<List<TaskEntity>> entities=dataBase.tadkDao().loadEntity();
@@ -84,7 +81,6 @@ public class MainActivity extends AppCompatActivity implements Adapter.ItemClick
                 adapter.setTaskList(entitiesList);
             }
         });
-
     }
 
     @Override
