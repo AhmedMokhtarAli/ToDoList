@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey;
 
 import java.util.Date;
 @Entity(tableName = "entity")
-public class TaskEntity extends LiveData<TaskEntity> {
+public class TaskEntity  {
 
 
     @PrimaryKey(autoGenerate = true)

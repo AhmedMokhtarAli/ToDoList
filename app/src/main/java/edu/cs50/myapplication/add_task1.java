@@ -28,11 +28,12 @@ public class add_task1 extends AppCompatActivity {
         public static final int PRIORITY_MEDIUM = 2;
         public static final int PRIORITY_LOW = 3;
         // Constant for default task id to be used when not in update mode
+        // ال id  معمول autogenrate ف -1 ده يعتبر اول id  بديهوله و بعد كده بيشتغل من عنده
         private static final int DEFAULT_TASK_ID = -1;
 
         private int mTaskId = DEFAULT_TASK_ID;
 
-        private static final String TAG= edu.cs50.myapplication.add_task.class.getSimpleName();
+        private static final String TAG=add_task1.class.getSimpleName();
         private EditText editText;
         private RadioGroup radioGroup;
         private Button button;
@@ -120,9 +121,11 @@ public class add_task1 extends AppCompatActivity {
             AppExcutor.getInstance().getDiskIO().execute(new Runnable() {
                 @Override
                 public void run() {
+                    // هنا بياخد ال id = -1  لان ده اول item في ال داتابيز
                     if(mTaskId==DEFAULT_TASK_ID) {
                         dataBase.tadkDao().insert(entity);
                     }
+                    //  هنا معاه اول  item فهيبتدي ي genrate هو id  من عنده و ال id مش ب -1
                     else
                     {
                         entity.setId(mTaskId);

@@ -35,6 +35,5 @@ public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickL
     public void onClick(View view) {
         int itemID=entities.get(getAdapterPosition()).getId();
         listner.oItemClickListner(itemID);
-
     }
 }

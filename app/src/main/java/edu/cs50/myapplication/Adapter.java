@@ -40,6 +40,8 @@ public class Adapter extends RecyclerView.Adapter<ViewHolder> {
     }
     @Override
     public int getItemCount() {
-        return getTaskList().size();
+        if(taskList==null)
+            return 0;
+        return taskList.size();
     }
 }
