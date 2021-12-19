@@ -25,6 +25,6 @@ public interface Task {
         void delete(TaskEntity entity);
 
         @Query("SELECT * FROM ENTITY WHERE ID = :id")
-          LiveData<TaskEntity> updateTask(int id);
+          LiveData<TaskEntity> loadTask(int id);
 
     }

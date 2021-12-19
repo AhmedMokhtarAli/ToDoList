@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -68,16 +69,17 @@ public class MainActivity extends AppCompatActivity implements Adapter.ItemClick
                 });
             }
         }).attachToRecyclerView(recyclerView);
-        extracted();
+        setupViewModel();
     }
-    private void extracted() {
+    private void setupViewModel() {
         Log.d(TAG,"GEETING DATA FROM DATABASE");
-        final LiveData<List<TaskEntity>> entities=dataBase.tadkDao().loadEntity();
+        MainViewModel viewModel=new ViewModelProvider(this).get(MainViewModel.class);
+        final LiveData<List<TaskEntity>> entities=viewModel.getTasks();
         entities.observe(this, new Observer<List<TaskEntity>>() {
             @Override
             public void onChanged(List<TaskEntity> entitiesList) {
-               Snackbar.make(recyclerView,"GEETING DATABASE UPDATE FROM LIVEDATA",Snackbar.LENGTH_SHORT).show();
-                Log.d(TAG,"GEETING DATABASE UPDATE FROM LIVEDATA");
+               Snackbar.make(recyclerView,"UPDATE LIST OF TASKS FROM LIVEDATA IN VIEW MODEL",Snackbar.LENGTH_SHORT).show();
+                Log.d(TAG,"UPDATE LIST OF TASKS FROM LIVEDATA IN VIEW MODEL");
                 adapter.setTaskList(entitiesList);
             }
         });
