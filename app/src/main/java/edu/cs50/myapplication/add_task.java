@@ -67,7 +67,6 @@ public class add_task extends AppCompatActivity {
         TaskEntity entity=new TaskEntity(descrepyion,priorty,date);
         dataBase.tadkDao().insert(entity);
         finish();
-
     }
 
     private int getPriorty() {
